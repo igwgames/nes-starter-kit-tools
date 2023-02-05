@@ -1,0 +1,30 @@
+name: Release to GH Releases
+on: push
+
+permissions:
+  contents: write
+
+jobs: 
+  build:
+    runs-on: ubuntu-latest
+    steps: 
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Build
+        run: "sh build.sh"
+      - name: Release Win
+        uses: softprops/action-gh-release@v1
+        with: 
+          files: |
+            bin/node16-windows-x64/*
+      - name: Release Linux x64
+        uses: softprops/action-gh-release@v1
+        with: 
+          files: |
+            bin/node16-linux-x64/*
+
+      - name: Release Linux Arm64
+        uses: softprops/action-gh-release@v1
+        with: 
+          files: |
+            bin/node16-linux-arm64/*
