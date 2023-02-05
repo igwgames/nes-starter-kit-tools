@@ -33,7 +33,7 @@ done
 for ARCH in "$ARCHS"; do
     echo "Packaging $ARCH"
     cd bin/$ARCH
-    tar -czvf $(printf '%s\n' "${ARCH#*-}").tar.gz *
+    tar czvf $(printf '%s\n' "${ARCH#*-}").tar.gz *
     mv $(printf '%s\n' "${ARCH#*-}").tar.gz ..
     cd ../..
 done
