@@ -31,9 +31,10 @@ for ARCH in "$WINARCHS"; do
 done
 
 for ARCH in "$ARCHS"; do
-    echo "Packaging $ARCH"
     cd bin/$ARCH
-    tar czvf $(printf '%s\n' "${ARCH#*-}").tar.gz *
-    mv $(printf '%s\n' "${ARCH#*-}").tar.gz ..
+    export FILE=$(printf '%s\n' "${ARCH#*-}").tar.gz
+    echo "Packaging $ARCH into \"$FILE\""
+    tar zvfc $FILE *
+    mv $FILE ..
     cd ../..
 done
