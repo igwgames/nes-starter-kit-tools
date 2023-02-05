@@ -22,7 +22,7 @@ for PROJ in $PROJECTS; do
     cd ../..
 done
 
-for ARCH in "$WINARCHS"; do
+for ARCH in $WINARCHS; do
     echo "Packaging $ARCH"
     cd bin/$ARCH
     zip $(printf '%s\n' "${ARCH#*-}").zip *
@@ -30,7 +30,7 @@ for ARCH in "$WINARCHS"; do
     cd ../..
 done
 
-for ARCH in "$ARCHS"; do
+for ARCH in $ARCHS; do
     cd bin/$ARCH
     export FILE=$(printf '%s\n' "${ARCH#*-}").tar.gz
     echo "Packaging $ARCH into \"$FILE\""
