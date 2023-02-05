@@ -12,19 +12,25 @@ jobs:
         uses: actions/checkout@v3
       - name: Build
         run: "sh build.sh"
+      - name: Get version
+        run: echo "tag_name=$(node -e "console.info(require('./chr2img/src/package.json').version)")"
+      - name: Show Version
+        run: "echo Releasing version ${{ env.tag_name }}"
       - name: Release Win
         uses: softprops/action-gh-release@v1
         with: 
+          tag_name: ${{ env.tag_name }}
           files: |
             bin/node16-windows-x64/*
       - name: Release Linux x64
         uses: softprops/action-gh-release@v1
         with: 
+          tag_name: ${{ env.tag_name }}
           files: |
             bin/node16-linux-x64/*
-
       - name: Release Linux Arm64
         uses: softprops/action-gh-release@v1
         with: 
+          tag_name: ${{ env.tag_name }}
           files: |
             bin/node16-linux-arm64/*
