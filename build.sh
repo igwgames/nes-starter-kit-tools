@@ -22,3 +22,16 @@ for PROJ in $PROJECTS; do
     cd ../..
 done
 
+for ARCH in "$WINARCHS"; do
+    echo "Packaging $ARCH"
+    cd bin/$ARCH
+    zip $(printf '%s\n' "${ARCH#*-}").zip *
+    cd ../..
+done
+
+for ARCH in "$ARCHS"; do
+    echo "Packaging $ARCH"
+    cd bin/$ARCH
+    tar -cvzf $(printf '%s\n' "${ARCH#*-}").zip *
+    cd ../..
+done

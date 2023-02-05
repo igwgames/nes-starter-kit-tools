@@ -19,21 +19,11 @@ jobs:
       - name: Build
         run: "sh build.sh"
 
-      - name: Release Win
+      - name: Release All
         uses: softprops/action-gh-release@v1
         with: 
           tag_name: ${{ env.tag_name }}
           files: |
-            bin/node16-windows-x64/*
-      - name: Release Linux x64
-        uses: softprops/action-gh-release@v1
-        with: 
-          tag_name: ${{ env.tag_name }}
-          files: |
-            bin/node16-linux-x64/*
-      - name: Release Linux Arm64
-        uses: softprops/action-gh-release@v1
-        with: 
-          tag_name: ${{ env.tag_name }}
-          files: |
-            bin/node16-linux-arm64/*
+            bin/windows-x64.zip
+            bin/linux-x64.tar.gz
+            bin/linux-arm64.tar.gz
