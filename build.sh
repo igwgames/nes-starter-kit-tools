@@ -11,12 +11,12 @@ for PROJ in $PROJECTS; do
     npm install
     for ARCH in $WINARCHS; do
         echo "    Starting arch $ARCH"
-        npx pkg --public --no-bytecode index.js --output ../../bin/$ARCH/$PROJ.exe -t $ARCH
+        npx pkg --no-bytecode --public-packages "*" --public index.js --output ../../bin/$ARCH/$PROJ.exe -t $ARCH
     done
 
     for ARCH in $ARCHS; do
         echo "    Starting arch $ARCH"
-        npx pkg --public --no-bytecode index.js --output ../../bin/$ARCH/$PROJ -t $ARCH
+        npx pkg --no-bytecode --public-packages "*" --public index.js --output ../../bin/$ARCH/$PROJ -t $ARCH
     done
     echo "Finished with $PROJ"
     cd ../..
@@ -26,7 +26,7 @@ for ARCH in "$WINARCHS"; do
     echo "Packaging $ARCH"
     cd bin/$ARCH
     zip $(printf '%s\n' "${ARCH#*-}").zip *
-    mv $(printf '%s\n' "${ARCH#*-}").tar.gz ..
+    mv $(printf '%s\n' "${ARCH#*-}").zip ..
     cd ../..
 done
 
