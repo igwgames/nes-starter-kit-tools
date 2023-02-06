@@ -192,7 +192,7 @@ tmxParse.parseFile(process.argv[4], function(err, tmxData) {
     // Little trick to tab every single line in, so our output looks nicer
     mapData = "    " + mapData.replace(/[\n]/g, "\n    ");
 
-    mapData = "#include \"source/library/bank_helpers.h\"\n#include \""+process.argv[5]+".h\"\n\nCODE_BANK(PRG_BANK_MAP_"+process.argv[3].toUpperCase()+");\n\n"+'const unsigned char ' + process.argv[3] + "["+elementCount+"] = {\n\n" + mapData + "\n\n\n};\n";
+    mapData = "#include \"source/c/library/bank_helpers.h\"\n#include \""+process.argv[5]+".h\"\n\nCODE_BANK(PRG_BANK_MAP_"+process.argv[3].toUpperCase()+");\n\n"+'const unsigned char ' + process.argv[3] + "["+elementCount+"] = {\n\n" + mapData + "\n\n\n};\n";
     var headerData = "// This is the data for your entire map, as made available in the .c file of this name\n\n#define PRG_BANK_MAP_"+process.argv[3].toUpperCase()+" "+process.argv[2]+"\nextern const unsigned char "+process.argv[3]+"[" + elementCount + "];";
 
     fs.writeFileSync(process.argv[5]+'.c', mapData);
