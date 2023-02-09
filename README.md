@@ -10,3 +10,6 @@ folder of your project and use them. (Though, if you use create-nes-game, this s
 be automated!)
 
 All code available under the MIT license, see LICENSE files in the subdirectories for details.
+
+The projects are all written in nodejs, and compiled to cross-platform binaries using
+[pkg](https://github.com/vercel/pkg).
