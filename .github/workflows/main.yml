@@ -40,4 +40,3 @@ jobs:
             bin/windows-x64.zip
             bin/linux-x64.tar.gz
             bin/linux-arm64.tar.gz
-            README.md

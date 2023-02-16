@@ -24,6 +24,7 @@ done
 
 for ARCH in $WINARCHS; do
     echo "Packaging $ARCH"
+    cp README.md bin/$ARCH
     cd bin/$ARCH
     zip $(printf '%s\n' "${ARCH#*-}").zip *
     mv $(printf '%s\n' "${ARCH#*-}").zip ..
@@ -31,6 +32,7 @@ for ARCH in $WINARCHS; do
 done
 
 for ARCH in $ARCHS; do
+    cp README.md bin/$ARCH
     cd bin/$ARCH
     export FILE=$(printf '%s\n' "${ARCH#*-}").tar.gz
     echo "Packaging $ARCH into \"$FILE\""
