@@ -16,6 +16,19 @@ jobs:
       - name: Show Version
         run: "echo Releasing version ${{ env.tag_name }}"
 
+      - name: Check version tag
+        id: releaseExists
+        uses: mukunku/tag-exists-action@v1.2.0
+        with: 
+          tag: ${{ env.tag_name }}
+      - name: Fail if tag already exists
+        if: ${{ steps.releaseExists.exists }}
+        uses: actions/github-script@v3
+        with:
+          script: |
+            core.setFailed('This version has already been published')
+
+
       - name: Build
         run: "sh build.sh"
 
