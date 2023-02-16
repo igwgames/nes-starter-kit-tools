@@ -22,7 +22,7 @@ jobs:
         with: 
           tag: ${{ env.tag_name }}
       - name: Fail if tag already exists
-        if: ${{ steps.releaseExists.output.exists }}
+        if: ${{ steps.releaseExists.outputs.exists }}
         uses: actions/github-script@v3
         with:
           script: |
