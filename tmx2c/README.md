@@ -19,15 +19,3 @@ Run the command as follows:
 
  tmx2c 4 overworld levels/overworld.tmx test
  ```
-
-## Packaging for nes-starter-kit
-
-We package it using a node module called `pkg`, which is installed globally. (`npm install -g pkg`)
-
-Use the following command to build a release exe:
-
-```
-pkg -d --public tools/tmx2c/src/index.js --output tools/tmx2c/tmx2c.exe -t node8-windows-x64
-```
-
-Note: This must be run from the root nes-starter-kit folder.
