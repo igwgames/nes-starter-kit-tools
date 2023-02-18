@@ -33,7 +33,7 @@ try {
             process.exit(1);
         }
     }
-    if (chrFile.mtime >= outFile.mtime || palFile.mtime >= outFile.mtime || defFile.mtime >= outFile.mtime) {
+    if (chrFile.mtimeMs < outFile.mtimeMs || palFile.mtimeMs < outFile.mtimeMs || defFile.mtimeMs < outFile.mtimeMs) {
         out(`chr, pal, and def files unchanged, skipping execution. (Force by deleting ${process.argv[5]})`);
         process.exit(0);
     }

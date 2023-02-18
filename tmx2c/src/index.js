@@ -22,7 +22,7 @@ try {
     const mapFile = fs.statSync(process.argv[4]);
     let outFile = null;
     try {
-        outFile = fs.statSync(process.argv[5]);
+        outFile = fs.statSync(process.argv[5] + '.c');
     } catch (e) {
         if (e.code === 'ENOENT') {
             outFile = null;
@@ -31,8 +31,8 @@ try {
             process.exit(1);
         }
     }
-    if (mapFile.mtime >= outFile.mtime) {
-        out(`map file unchanged, skipping execution. (Force by deleting ${process.argv[5]})`);
+    if (mapFile?.mtimeMs < outFile?.mtimeMs) {
+        out(`map file unchanged, skipping execution. (Force by deleting ${process.argv[5]}.c)`);
         process.exit(0);
     }
 } catch (e) {
