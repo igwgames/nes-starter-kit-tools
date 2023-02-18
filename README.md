@@ -38,23 +38,23 @@ If you update the keys below in your `.create-nes-game.config.json` file, then r
 ```json
     "beforeStepActions": {
         "build": [
-            "node tools/nes-starter-kit-tools-src/nes-starter-kit-tools-1.1.1/tmx2c/src/index.js 3 overworld levels/overworld.tmx source/c/generated/overworld"
+            "node tools/nes-starter-kit-tools-src/nes-starter-kit-tools-1.1.2/tmx2c/src/index.js 3 overworld levels/overworld.tmx source/c/generated/overworld"
         ]
     },
     "afterStepActions": {
         "build": [
-            "node tools/nes-starter-kit-tools-src/nes-starter-kit-tools-1.1.1/chr2img/src/index.js graphics/tiles.chr graphics/palettes/main_bg.pal graphics/generated/tiles.png",
-            "node tools/nes-starter-kit-tools-src/nes-starter-kit-tools-1.1.1/sprite_def2img/src/index.js ./source/c/sprites/sprite_definitions.c ./graphics/sprites.chr ./graphics/palettes/main_sprite.pal graphics/generated/sprites.png"
+            "node tools/nes-starter-kit-tools-src/nes-starter-kit-tools-1.1.2/chr2img/src/index.js graphics/tiles.chr graphics/palettes/main_bg.pal graphics/generated/tiles.png",
+            "node tools/nes-starter-kit-tools-src/nes-starter-kit-tools-1.1.2/sprite_def2img/src/index.js ./source/c/sprites/sprite_definitions.c ./graphics/sprites.chr ./graphics/palettes/main_sprite.pal graphics/generated/sprites.png"
         ],
         "download-dependencies": [
-            "cd tools/nes-starter-kit-tools-src/nes-starter-kit-tools-1.1.1/chr2img/src && npm install",
-            "cd tools/nes-starter-kit-tools-src/nes-starter-kit-tools-1.1.1/tmx2c/src && npm install",
-            "cd tools/nes-starter-kit-tools-src/nes-starter-kit-tools-1.1.1/sprite_def2img/src && npm install"
+            "cd tools/nes-starter-kit-tools-src/nes-starter-kit-tools-1.1.2/chr2img/src && npm install",
+            "cd tools/nes-starter-kit-tools-src/nes-starter-kit-tools-1.1.2/tmx2c/src && npm install",
+            "cd tools/nes-starter-kit-tools-src/nes-starter-kit-tools-1.1.2/sprite_def2img/src && npm install"
         ]
     },
     "extraDependencies": [{
         "name": "nes-starter-kit-tools-src",
-        "default": "https://github.com/cppchriscpp/nes-starter-kit-tools/archive/refs/tags/1.1.1.zip"
+        "default": "https://github.com/cppchriscpp/nes-starter-kit-tools/archive/refs/tags/1.1.2.zip"
     }]
 }
 ```
