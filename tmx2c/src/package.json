@@ -1,6 +1,6 @@
 {
   "name": "tmx2c",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "Converts tmx files to C code for use with nes-starter-kit",
   "main": "index.js",
   "scripts": {

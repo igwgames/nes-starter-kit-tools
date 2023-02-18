@@ -7,7 +7,9 @@
  * bit of the library. Don't be afraid to reach out for help if you're tweaking this. I hope it meets most needs
  * as-is.
  */
-var VERSION = require('./package.json').version;
+const VERSION = require('./package.json').version;
+
+const fs = require('fs');
 
 // Expects exactly tmx2c infile outfile (first param is always node)
 if (process.argv.length != 6) {
@@ -15,9 +17,30 @@ if (process.argv.length != 6) {
     process.exit(1);
 }
 
+// Test to make sure a change is really needed
+try {
+    const mapFile = fs.statSync(process.argv[4]);
+    let outFile = null;
+    try {
+        outFile = fs.statSync(process.argv[5]);
+    } catch (e) {
+        if (e.code === 'ENOENT') {
+            outFile = null;
+        } else {
+            out('Critical error trying to access output file! Exiting');
+            process.exit(1);
+        }
+    }
+    if (mapFile.mtime >= outFile.mtime) {
+        out(`map file unchanged, skipping execution. (Force by deleting ${process.argv[5]})`);
+        process.exit(0);
+    }
+} catch (e) {
+    out('FAILED! One or more of the input files could not be found.');
+    process.exit(1);
+}
 
 var tmxParse = require('tmx-parser'),
-    fs = require('fs'),
     logLevel = 'info', // change to 'verbose' for some extra output
     tileMap = null,
     spriteMap = null,

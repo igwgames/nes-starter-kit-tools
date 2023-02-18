@@ -6,11 +6,37 @@
  * It's still very quick and dirty. I tried to document some of it, but it probably isn't very clear.
  * Don't be afraid to reach out for help if you're tweaking this. I hope it meets most needs as-is.
  */
-var VERSION = require('./package.json').version;
+const VERSION = require('./package.json').version;
+
+const fs = require('fs');
 
 // Expects exactly (binary) infile outfile (first param is always node)
 if (process.argv.length != 5) {
     printUsage();
+    process.exit(1);
+}
+
+// Test to make sure a change is really needed
+try {
+    const chrFile = fs.statSync(process.argv[2]),
+        palFile = fs.statSync(process.argv[3]);
+    let outFile = null;
+    try {
+        outFile = fs.statSync(process.argv[4]);
+    } catch (e) {
+        if (e.code === 'ENOENT') {
+            outFile = null;
+        } else {
+            out('Critical error trying to access output file! Exiting');
+            process.exit(1);
+        }
+    }
+    if (chrFile.mtime >= outFile.mtime || palFile.mtime >= outFile.mtime) {
+        out(`chr and pal files unchanged, skipping execution. (Force by deleting ${process.argv[4]})`);
+        process.exit(0);
+    }
+} catch (e) {
+    out('FAILED! One or more of the input files could not be found.');
     process.exit(1);
 }
 
@@ -22,6 +48,7 @@ function printUsage() {
     out('chr2img version ' + VERSION);
     out('Usage: chr2img [chr file to convert] [pal file to convert] [file to save output to]');
 }
+
 
 function out() {
     var args = [].slice.call(arguments);
@@ -125,9 +152,9 @@ var reverseBitmaskLookup = [
     0b00000001
 ];
 
+
 // Bunch of variables. Hopefully the names are semi clear...
-var fs = require('fs'),
-    Jimp = require('jimp'),
+var Jimp = require('jimp'),
     chrFile = process.argv[2],
     palFile = process.argv[3],
     outFile = process.argv[4],

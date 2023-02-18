@@ -7,13 +7,41 @@
  * bit of the library. Don't be afraid to reach out for help if you're tweaking this. I hope it meets most needs
  * as-is.
  */
-var VERSION = require('./package.json').version;
+const VERSION = require('./package.json').version;
+
+const fs = require('fs');
 
 // Expects exactly the number of params we expect (first param is always node)
 if (process.argv.length != 6) {
     printUsage();
     process.exit(1);
 }
+
+// Test to make sure a change is really needed
+try {
+    const chrFile = fs.statSync(process.argv[2]),
+        palFile = fs.statSync(process.argv[3]),
+        defFile = fs.statSync(process.argv[4]);
+    let outFile = null;
+    try {
+        outFile = fs.statSync(process.argv[5]);
+    } catch (e) {
+        if (e.code === 'ENOENT') {
+            outFile = null;
+        } else {
+            out('Critical error trying to access output file! Exiting');
+            process.exit(1);
+        }
+    }
+    if (chrFile.mtime >= outFile.mtime || palFile.mtime >= outFile.mtime || defFile.mtime >= outFile.mtime) {
+        out(`chr, pal, and def files unchanged, skipping execution. (Force by deleting ${process.argv[5]})`);
+        process.exit(0);
+    }
+} catch (e) {
+    out('FAILED! One or more of the input files could not be found.');
+    process.exit(1);
+}
+
 
 // Lookup table to convert NES colors to rgb.
 // Stolen from: http://www.thealmightyguru.com/Games/Hacking/Wiki/index.php/NES_Palette
@@ -102,8 +130,7 @@ var reverseBitmaskLookup = [
     0b00000001
 ];
 
-var fs = require('fs'),
-    logLevel = 'info', // change to 'verbose' for some extra output
+var logLevel = 'info', // change to 'verbose' for some extra output
     Jimp = require('jimp'),
     path = require('path'),
     // NOTE: This is unused, however pkg uses it to figure out that it has to package up font.png, which we need to add duplicate text.
