@@ -12,7 +12,7 @@ be automated!)
 
 All code available under the MIT license, see LICENSE files in the subdirectories for details.
 
-[Repository Home](https://github.com/cppchriscpp/nes-starter-kit-tools)
+[Repository Home](https://gh.nes.science/nes-starter-kit-tools)
 
 The projects are all written in nodejs, and compiled to cross-platform binaries using
 [pkg](https://github.com/vercel/pkg).
@@ -54,7 +54,7 @@ If you update the keys below in your `.create-nes-game.config.json` file, then r
     },
     "extraDependencies": [{
         "name": "nes-starter-kit-tools-src",
-        "default": "https://github.com/cppchriscpp/nes-starter-kit-tools/archive/refs/tags/1.1.2.zip"
+        "default": "https://gh.nes.science/nes-starter-kit-tools/archive/refs/tags/1.1.2.zip"
     }]
 }
 ```
